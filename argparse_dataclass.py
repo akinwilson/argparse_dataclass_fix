@@ -339,6 +339,7 @@ def _add_dataclass_options(
         kwargs = {
             "type": field.metadata.get("type", field.type),
             "help": field.metadata.get("help", None),
+            "default": field.default
         }
 
         if field.metadata.get("args") and not positional:
@@ -400,8 +401,8 @@ def _add_dataclass_options(
 
         if field.default == field.default_factory == MISSING and not positional:
             kwargs["required"] = True
-        else:
-            kwargs["default"] = MISSING
+        # else:
+        #     kwargs["default"] = MISSING
 
         if field.type is bool:
             _handle_bool_type(field, args, kwargs)
